@@ -4,8 +4,6 @@
 
 [比赛地址](https://cloud.tencent.com/developer/competition/introduction/10015)
 
-![image](https://user-images.githubusercontent.com/18554747/128637613-c176e586-f479-486b-981e-f70236866191.gif)
-
 ## 解题思路
 
 搜索后可以发现一篇关于俄罗斯方块算法的文章 [El-Tetris – An Improvement on Pierre Dellacherie’s Algorithm | imake](https://imake.ninja/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/)，并且文章附有使用样例和源码。
