@@ -7,9 +7,10 @@ import {
   mapShapeToPiece,
   boardToGrid,
   askQuestion,
+  setCount,
 } from "./utils";
 
-const playElTetris = (eltetris, piece, count) => {
+const playElTetris = (eltetris, piece) => {
   const move = eltetris.pickMove(piece);
 
   const last_move = eltetris.playMove(
@@ -98,6 +99,35 @@ const syncOperate = (tetris, move) => {
   return tetris.update();
 };
 
+const save = (opRecord, score) => {
+  const OUTPUT_PATH = path.resolve("build");
+  const SCORE_FILE = path.resolve(OUTPUT_PATH, "score.txt");
+  const OPERATE_FILE = path.resolve(OUTPUT_PATH, "operate.txt");
+  const UPLOAD_SCRIPT_FILE = path.resolve(OUTPUT_PATH, "upload.js");
+
+  if (!fs.existsSync(OUTPUT_PATH)) {
+    fs.mkdirSync(OUTPUT_PATH);
+  }
+
+  const maxScore = fs.existsSync(SCORE_FILE)
+    ? +fs.readFileSync(SCORE_FILE).toString()
+    : 0;
+
+  if (score <= maxScore) {
+    return false;
+  }
+  fs.writeFileSync(SCORE_FILE, String(score));
+  fs.writeFileSync(OPERATE_FILE, opRecord.join(","));
+
+  const uploadScript = `record = '${opRecord.join(",")}'
+  await axios.post('api/upload', {
+    record,
+    score: ${score},
+  });`;
+  fs.writeFileSync(UPLOAD_SCRIPT_FILE, uploadScript);
+  return true;
+};
+
 const main = async () => {
   const { game, tetris } = initGame();
   const col = config.gridConfig.col;
@@ -110,6 +140,7 @@ const main = async () => {
   // while (tetris.brickCount < tetris.maxBrickCount) {
   while (tetris.brickCount < 10000) {
     tetris.initBrick(); // 初始方块
+    setCount(tetris.brickCount);
 
     const piece = getEltetrisPiece(tetris);
     const { move, last_move: lastMove } = playElTetris(
@@ -149,14 +180,12 @@ const main = async () => {
   // console.log(boardToGrid(eltetris.board));
   game.gameOver();
 
-  const OUTPUT_PATH = path.resolve("build");
-  if (!fs.existsSync(OUTPUT_PATH)) {
-    fs.mkdirSync(OUTPUT_PATH);
+  const saved = save(opRecord, score);
+
+  if (saved) {
+    console.log("新的最高分！");
   }
-  fs.writeFileSync(
-    path.resolve(OUTPUT_PATH, "operate.txt"),
-    opRecord.join(",")
-  );
+  console.log("最终得分", score);
 };
 
 main();

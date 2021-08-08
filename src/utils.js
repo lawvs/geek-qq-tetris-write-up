@@ -69,3 +69,13 @@ export function askQuestion(query) {
     })
   );
 }
+
+let count = 0;
+export const setCount = (n) => {
+  count = n;
+  return count;
+};
+
+export const getCount = () => {
+  return count;
+};
