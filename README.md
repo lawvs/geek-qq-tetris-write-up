@@ -38,3 +38,18 @@ _腾讯员工请务必前往内部赛道-码客平台参赛（若仍选择外部
 例如：
 
 现在屏幕中原有 120 个格子。下一个方块出现，此时屏幕上有 124 个格子。玩家控制这个方块一次性消除了两行，那么玩家这次得分就是：124 × 3 = 372 分。
+
+## References
+
+- [Charming2015/TetrisAI-By-Charming: 基于 Pierre Dellacherie 算法实现俄罗斯方块的人工智能](https://github.com/Charming2015/TetrisAI-By-Charming)
+- [腾讯极客挑战赛第四期：鹅罗斯方块 规则分析与 Pierre Dellacherie 算法实现](https://segmentfault.com/a/1190000040460501)
+- [Tetris AI – The (Near) Perfect Bot | Code My Road](https://codemyroad.wordpress.com/2013/04/14/tetris-ai-the-near-perfect-player/)
+- [El-Tetris – An Improvement on Pierre Dellacherie’s Algorithm | imake](https://imake.ninja/el-tetris-an-improvement-on-pierre-dellacheries-algorithm/)
+- [基于 Pierre Dellacherie 算法玩俄罗斯方块 | 青椒的博客](https://www.zhanghangkui.com/2020/09/03/tetris2/)
+- [ielashi/eltetris: Tetris AI](https://github.com/ielashi/eltetris)
+
+## Licence
+
+Use the AGPL-3.0-or-later license due to the use of [ielashi/eltetris: Tetris AI](https://github.com/ielashi/eltetris).
+
+NOTE: THE FILES UNDER `tetris` ARE COPYRIGHT TO Tencent Cloud.
