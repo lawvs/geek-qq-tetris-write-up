@@ -135,7 +135,8 @@ const main = async () => {
 
     const DEBUG = false;
     // DEBUG
-    if (DEBUG && tetris.brickCount > 113) {
+    if (DEBUG && tetris.brickCount > 0) {
+      debugger;
       console.log("正在处理的方块", tetris.brickCount);
       console.log(boardToGrid(eltetris.board), move);
       const { gridsStr, brickStr } = tetris.getSnapshot();
