@@ -4,13 +4,17 @@
   "description": "腾讯极客挑战赛第四期：鹅罗斯方块",
   "type": "module",
   "scripts": {
+    "dev": "node --es-module-specifier-resolution=node src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "tetris"
   ],
   "author": "白水",
-  "license": "MIT",
-  "dependencies": {},
+  "license": "AGPL-3.0-or-later",
+  "dependencies": {
+    "eltetris": "github:ielashi/eltetris",
+    "rewire": "^5.0.0"
+  },
   "devDependencies": {}
 }
