@@ -1,4 +1,6 @@
 import readline from "readline";
+import fs from "fs";
+import path from "path";
 
 // 0,1,2,3,4,5,6
 // I,L,J,T,O,S,Z
@@ -78,4 +80,36 @@ export const setCount = (n) => {
 
 export const getCount = () => {
   return count;
+};
+
+/**
+ * Save score and record to file
+ */
+export const saveScore = (opRecord, score) => {
+  const OUTPUT_PATH = path.resolve("build");
+  const SCORE_FILE = path.resolve(OUTPUT_PATH, "score.txt");
+  const OPERATE_FILE = path.resolve(OUTPUT_PATH, "operate.txt");
+  const UPLOAD_SCRIPT_FILE = path.resolve(OUTPUT_PATH, "upload.js");
+
+  if (!fs.existsSync(OUTPUT_PATH)) {
+    fs.mkdirSync(OUTPUT_PATH);
+  }
+
+  const maxScore = fs.existsSync(SCORE_FILE)
+    ? +fs.readFileSync(SCORE_FILE).toString()
+    : 0;
+
+  if (score <= maxScore) {
+    return false;
+  }
+  fs.writeFileSync(SCORE_FILE, String(score));
+  fs.writeFileSync(OPERATE_FILE, opRecord.join(","));
+
+  const uploadScript = `record = '${opRecord.join(",")}'
+  await axios.post('api/upload', {
+    record,
+    score: ${score},
+  });`;
+  fs.writeFileSync(UPLOAD_SCRIPT_FILE, uploadScript);
+  return true;
 };

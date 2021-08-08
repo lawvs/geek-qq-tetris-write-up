@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import { initGame, config } from "./tetris";
 import { ElTetris, pieces } from "./eltetris";
 import {
@@ -8,6 +6,7 @@ import {
   boardToGrid,
   askQuestion,
   setCount,
+  saveScore,
 } from "./utils";
 
 const playElTetris = (eltetris, piece) => {
@@ -99,35 +98,6 @@ const syncOperate = (tetris, move) => {
   return tetris.update();
 };
 
-const save = (opRecord, score) => {
-  const OUTPUT_PATH = path.resolve("build");
-  const SCORE_FILE = path.resolve(OUTPUT_PATH, "score.txt");
-  const OPERATE_FILE = path.resolve(OUTPUT_PATH, "operate.txt");
-  const UPLOAD_SCRIPT_FILE = path.resolve(OUTPUT_PATH, "upload.js");
-
-  if (!fs.existsSync(OUTPUT_PATH)) {
-    fs.mkdirSync(OUTPUT_PATH);
-  }
-
-  const maxScore = fs.existsSync(SCORE_FILE)
-    ? +fs.readFileSync(SCORE_FILE).toString()
-    : 0;
-
-  if (score <= maxScore) {
-    return false;
-  }
-  fs.writeFileSync(SCORE_FILE, String(score));
-  fs.writeFileSync(OPERATE_FILE, opRecord.join(","));
-
-  const uploadScript = `record = '${opRecord.join(",")}'
-  await axios.post('api/upload', {
-    record,
-    score: ${score},
-  });`;
-  fs.writeFileSync(UPLOAD_SCRIPT_FILE, uploadScript);
-  return true;
-};
-
 const main = async () => {
   const { game, tetris } = initGame();
   const col = config.gridConfig.col;
@@ -164,8 +134,8 @@ const main = async () => {
       break;
     }
 
-    const DEBUG = false;
     // DEBUG
+    const DEBUG = false;
     if (DEBUG && tetris.brickCount >= 0) {
       debugger;
       console.log("正在处理的方块", tetris.brickCount);
@@ -178,17 +148,18 @@ const main = async () => {
   }
 
   const { opRecord, score, brickCount } = tetris;
-  console.log("前运行方块数：", brickCount);
+  console.log("运行方块数：", brickCount);
   console.log("最终得分", score);
 
   // console.log(boardToGrid(eltetris.board));
   // game.gameOver();
 
-  const saved = save(opRecord, score);
+  const saved = saveScore(opRecord, score);
 
   if (saved) {
     console.log("新的最高分！");
   }
+  return score;
 };
 
 main();
