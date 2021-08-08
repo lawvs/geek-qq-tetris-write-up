@@ -1,14 +1,15 @@
 {
-  "name": "geek-qq-tetris",
+  "name": "geek-qq-tetris-write-up",
   "version": "1.0.0",
-  "description": "腾讯极客挑战赛第四期：鹅罗斯方块",
+  "description": "腾讯极客挑战赛第四期：鹅罗斯方块题解",
   "type": "module",
   "scripts": {
     "dev": "node --es-module-specifier-resolution=node src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "tetris"
+    "tetris",
+    "ai"
   ],
   "author": "白水",
   "license": "AGPL-3.0-or-later",
