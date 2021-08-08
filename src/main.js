@@ -62,10 +62,16 @@ const syncOperate = (tetris, move) => {
     throw new Error();
   }
 
+  let lastIdx = -1;
   while (true) {
+    if (lastIdx === tetris.stateIndex) {
+      // rotate fail
+      return { topTouched: true };
+    }
     if (tetris.stateIndex === shapeOrientationIdx) {
       break;
     }
+    lastIdx = tetris.stateIndex;
     tetris.rotate();
   }
 
@@ -74,9 +80,20 @@ const syncOperate = (tetris, move) => {
     (min, [x, y]) => (x < min ? x : min),
     +Infinity
   );
-  const stepCount = -4 - left + move.column;
 
-  tetris.move("right", stepCount);
+  const stepCount = -4 - left + move.column;
+  // tetris API can only move 1 step
+  if (stepCount < 0) {
+    tetris.move("left", 1);
+    if (stepCount < -1) {
+      tetris.move("left", -stepCount - 1);
+    }
+  } else if (stepCount > 0) {
+    tetris.move("right", 1);
+    if (stepCount > 1) {
+      tetris.move("right", stepCount - 1);
+    }
+  }
   tetris.drop();
   return tetris.update();
 };
@@ -91,7 +108,7 @@ const main = async () => {
   tetris.initGrids(); // 初始格子
 
   // while (tetris.brickCount < tetris.maxBrickCount) {
-  while (tetris.brickCount < 4000) {
+  while (tetris.brickCount < 10000) {
     tetris.initBrick(); // 初始方块
 
     const piece = getEltetrisPiece(tetris);
@@ -112,7 +129,7 @@ const main = async () => {
     }
 
     if (lastMove.game_over) {
-      console.log(lastMove);
+      console.log("last game over", lastMove);
       break;
     }
 
