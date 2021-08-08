@@ -166,26 +166,29 @@ const main = async () => {
 
     const DEBUG = false;
     // DEBUG
-    if (DEBUG && tetris.brickCount > 0) {
+    if (DEBUG && tetris.brickCount >= 0) {
       debugger;
       console.log("正在处理的方块", tetris.brickCount);
-      console.log(boardToGrid(eltetris.board), move);
-      const { gridsStr, brickStr } = tetris.getSnapshot();
-      console.log(gridsStr);
+      // console.log("eltetris\n", boardToGrid(eltetris.board), move);
+      // const { gridsStr, brickStr } = tetris.getSnapshot();
+      // console.log(gridsStr);
       // const ans = await askQuestion("Pause");
+      game.gameOver();
     }
   }
 
   const { opRecord, score, brickCount } = tetris;
+  console.log("前运行方块数：", brickCount);
+  console.log("最终得分", score);
+
   // console.log(boardToGrid(eltetris.board));
-  game.gameOver();
+  // game.gameOver();
 
   const saved = save(opRecord, score);
 
   if (saved) {
     console.log("新的最高分！");
   }
-  console.log("最终得分", score);
 };
 
 main();
