@@ -9,7 +9,7 @@ const getAnything = ({ proto = function () {}, name, silent = false }) => {
     get(target, p, receiver) {
       log(`get ${name}:`, target, p);
       if (p in target) return target[p];
-      return getAnything({ name: p, proto: proto[p] });
+      return getAnything({ name: p, proto: proto[p], silent });
     },
     set(target, p, v, receiver) {
       log(`set ${name}:`, target, p);
@@ -18,12 +18,12 @@ const getAnything = ({ proto = function () {}, name, silent = false }) => {
     },
     apply(target, thisAr, argArray) {
       log(`apply ${target}`, thisAr, argArray);
-      return getAnything({ name: name + "Result" });
+      return getAnything({ name: name + "Result", silent });
     },
   });
 };
 
-const mockCanvas = getAnything({ name: "canvas" });
+const mockCanvas = getAnything({ name: "canvas", silent: true });
 
 const tetrisGlobal = {
   addEventListener: getAnything({ name: "addEventListener", silent: true }),
