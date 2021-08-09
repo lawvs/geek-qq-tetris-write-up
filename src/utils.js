@@ -106,10 +106,13 @@ export const saveScore = (opRecord, score) => {
   fs.writeFileSync(OPERATE_FILE, opRecord.join(","));
 
   const uploadScript = `record = '${opRecord.join(",")}'
-  await axios.post('api/upload', {
-    record,
-    score: ${score},
-  });`;
+await axios.post('api/upload', {
+  record,
+  score: ${score},
+});
+game.playRecord(record.split(','));
+game.replayFreq = 0;
+`;
   fs.writeFileSync(UPLOAD_SCRIPT_FILE, uploadScript);
   return true;
 };
