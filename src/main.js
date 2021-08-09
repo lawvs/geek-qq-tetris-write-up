@@ -59,7 +59,7 @@ const syncOperate = (tetris, move) => {
       "pieceType",
       pieceType
     );
-    throw new Error();
+    throw new Error("找不到对应方块");
   }
 
   let lastIdx = -1;
