@@ -80,19 +80,15 @@ const syncOperate = (tetris, move) => {
     (min, [x, y]) => (x < min ? x : min),
     +Infinity
   );
-
-  const stepCount = -4 - left + move.column;
-  // tetris API can only move 1 step
+  let stepCount = -4 - left + move.column;
+  let dir = "right";
   if (stepCount < 0) {
-    tetris.move("left", 1);
-    if (stepCount < -1) {
-      tetris.move("left", -stepCount - 1);
-    }
-  } else if (stepCount > 0) {
-    tetris.move("right", 1);
-    if (stepCount > 1) {
-      tetris.move("right", stepCount - 1);
-    }
+    stepCount = -stepCount;
+    dir = "left";
+  }
+  while (stepCount-- > 0) {
+    // only move 1 step to check validity
+    tetris.move(dir);
   }
   tetris.drop();
   return tetris.update();
