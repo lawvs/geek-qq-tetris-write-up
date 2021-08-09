@@ -8,23 +8,8 @@ export const ElTetris = eltetris.eltetris.ElTetris;
 const clamp = (min = -Infinity, max = Infinity) =>
   getCount() > min && getCount() < max;
 
-let LandingHeightFactor = -4.500158825082766;
-let RowsRemovedFactor = 3.4181268101392694;
-
-ElTetris.prototype.evaluateBoard = function (last_move, board) {
-  const count = getCount();
-
-  return (
-    GetLandingHeight(last_move, board) * LandingHeightFactor +
-    last_move.rows_removed * RowsRemovedFactor +
-    GetRowTransitions(board, this.number_of_columns) * -3.2178882868487753 +
-    GetColumnTransitions(board, this.number_of_columns) * -9.348695305445199 +
-    GetNumberOfHoles(board, this.number_of_columns) * -7.899265427351652 +
-    GetWellSums(board, this.number_of_columns) * -3.3855972247263626
-  );
-};
-
 ElTetris.prototype.pickMove = function (piece) {
+  // Fallback
   const worst = {
     evaluation: -100000,
     orientation: piece[0].orientation,
@@ -77,10 +62,11 @@ ElTetris.prototype.pickMove = function (piece) {
     clamp(8500, 8600) ||
     clamp(9600, 9700)
   ) {
+    // Use default strategy
     return candidates[0];
   }
-  const target = candidates.slice(0, 5).find((i) => !i.removed);
-  return target || candidates[0];
+  // Prioritize operations without block removed
+  return candidates.slice(0, 5).find((i) => !i.removed);
 
   // return {
   //   orientation: piece[best_orientation].orientation,

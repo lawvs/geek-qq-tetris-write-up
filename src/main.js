@@ -147,12 +147,12 @@ const main = async () => {
     }
   }
 
+  // console.log(boardToGrid(eltetris.board));
+  game.gameOver();
+
   const { opRecord, score, brickCount } = tetris;
   console.log("运行方块数：", brickCount);
   console.log("最终得分", score);
-
-  // console.log(boardToGrid(eltetris.board));
-  // game.gameOver();
 
   const saved = saveScore(opRecord, score);
 
