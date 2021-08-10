@@ -4,7 +4,7 @@
 
 [比赛地址](https://cloud.tencent.com/developer/competition/introduction/10015)
 
-代码得分：`503114`
+代码得分：`470544`
 
 ## 解题思路
 
@@ -111,9 +111,10 @@ _腾讯员工请务必前往内部赛道-码客平台参赛（若仍选择外部
 - [腾讯极客挑战赛第四期：鹅罗斯方块 规则分析与 Pierre Dellacherie 算法实现](https://segmentfault.com/a/1190000040460501)
 - [Tetris AI – The (Near) Perfect Bot | Code My Road](https://codemyroad.wordpress.com/2013/04/14/tetris-ai-the-near-perfect-player/)
 - [jhnns/rewire: Easy monkey-patching for node.js unit tests](https://github.com/jhnns/rewire)
+- [Konano/geekTencent-4](https://github.com/Konano/geekTencent-4/)
 
 ## Licence
 
-Use the AGPL-3.0-or-later license due to the use of [ielashi/eltetris: Tetris AI](https://github.com/ielashi/eltetris).
+Use the AGPL-3.0-or-later license due to the use of [ielashi/eltetris](https://github.com/ielashi/eltetris).
 
 NOTE: THE FILES UNDER `tetris` ARE COPYRIGHT TO Tencent Cloud.
