@@ -47,20 +47,12 @@ ElTetris.prototype.pickMove = function (piece) {
 
   candidates.sort((a, b) => b.evaluation - a.evaluation);
   if (
-    maxLandingHeight >= 11 ||
-    clamp(450, 550) ||
-    clamp(850, 1100) ||
-    clamp(2800, 2950) ||
-    clamp(3400, 3500) ||
-    clamp(5150, 5250) ||
-    clamp(5450, 5550) ||
-    clamp(5800, 6000) ||
-    clamp(6400, 6560) ||
-    clamp(7000, 7150) ||
-    clamp(7300, 7400) ||
-    clamp(8100, 8200) ||
-    clamp(8500, 8600) ||
-    clamp(9600, 9700)
+    maxLandingHeight >= 10 ||
+    clamp(400, 500) ||
+    clamp(1100, 1200) ||
+    clamp(3700, 4000) ||
+    clamp(4800, 5200) ||
+    clamp(5900, 6000)
   ) {
     // Use default strategy
     return candidates[0];
