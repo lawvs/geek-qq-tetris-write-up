@@ -15,7 +15,6 @@ ElTetris.prototype.pickMove = function (piece) {
     orientation: piece[0].orientation,
     column: 0,
     removed: 0,
-    landing_height: Infinity,
   };
   let candidates = [worst];
   let maxLandingHeight = -Infinity;
@@ -39,7 +38,6 @@ ElTetris.prototype.pickMove = function (piece) {
           orientation: piece[i].orientation,
           column: j,
           removed: last_move.rows_removed,
-          landing_height: last_move.landing_height,
         });
       }
     }

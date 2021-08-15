@@ -109,11 +109,7 @@ const main = async () => {
     setCount(tetris.brickCount);
 
     const piece = getEltetrisPiece(tetris);
-    const { move, last_move: lastMove } = playElTetris(
-      eltetris,
-      piece,
-      tetris.brickCount
-    );
+    const { move, last_move: lastMove } = playElTetris(eltetris, piece);
     const { topTouched, isRoundLimited } = syncOperate(tetris, move);
 
     // 触顶或者超过游戏的最大方块数量后，结束游戏
