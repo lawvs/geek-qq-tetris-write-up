@@ -111,7 +111,7 @@ _腾讯员工请务必前往内部赛道-码客平台参赛（若仍选择外部
 - [腾讯极客挑战赛第四期：鹅罗斯方块 规则分析与 Pierre Dellacherie 算法实现](https://segmentfault.com/a/1190000040460501)
 - [Tetris AI – The (Near) Perfect Bot | Code My Road](https://codemyroad.wordpress.com/2013/04/14/tetris-ai-the-near-perfect-player/)
 - [jhnns/rewire: Easy monkey-patching for node.js unit tests](https://github.com/jhnns/rewire)
-- [Konano/geekTencent-4](https://github.com/Konano/geekTencent-4/)
+- [Konano/geekTencent-4-Tetris](https://github.com/Konano/geekTencent-4-Tetris/)
 
 ## Licence
 
